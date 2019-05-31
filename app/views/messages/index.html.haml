@@ -1,0 +1,53 @@
+.flash-box
+.wrapper
+  .contents-side
+    .side-header
+      .side-header__box
+        %p.side-header__box__user-name aaa
+        %ul.side-header__box__menu
+          %li.side-header__box__menu__new-group 
+            %a{href:"/groups/new"}
+              %i.fa.fa-edit
+          %li.side-header__box__menu__edit-user
+            %a{href:"/users/"}
+              %i.fa.fa-cog
+    .groups
+      .group
+        %p.group-name sample
+        %p.group-message hello!!
+
+  .contents-main
+    .main-header
+      .main-header__group
+        %h2.main-header__group-name sample
+        %ul.main-header__group-member 
+          %li.main-header__group-member Member : 
+          %li.main-header__group-member__list 　aaa
+      %a{href: "edit"}
+      .main-header__edit-btn Edit 
+    .messages
+      .message-info
+        %p.message-info__member aaa
+        %p.message-info__date 2019/05/23(Thu) 23:15:09
+      %p.massage-text hello!!
+    .form
+      %form.message-new  
+        .message-box 
+          %input{ class: "message-box__text",id: "message-content",type: "text",name: "message[content]",placeholder: "type a message"}
+            
+          %label{ class: "image-label" ,
+                  for: "message_image",}
+            %i.fa.fa-image 
+            %input{ class: "image-label__input",type:"file",name: "message[image]",id: "message_image"}
+        %input{ class: "submit-btn",
+                type: "submit",
+                value: "Send",
+                name: "commit",
+                "data-disable-with" => "Send"}
+        
+
+
+
+
+
+
