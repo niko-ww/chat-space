@@ -1,26 +1,7 @@
 .flash-box
 .wrapper
-  .contents-side
-    .side-header
-      .side-header__box
-        %h3.side-header__box__user-name
-          = current_user.name
-        %ul.side-header__box__menu
-          %li.side-header__box__menu__new-group 
-            = link_to new_group_path do
-              = fa_icon 'pencil-square-o', class: 'icon'
-          %li.side-header__box__menu__edit-user
-            = link_to edit_user_path(current_user) do
-              = fa_icon 'cog', class: 'icon'
-    .groups
-      .group
-        - current_user.groups.each do |group|
-          = link_to group_messages_path(group) do
-            .group__name
-              = group.name
-            .group__message
-              メッセージはまだありません。
-        
+  = render "shared/contents-side"
+    
 
   .contents-main
     .main-header
@@ -32,25 +13,18 @@
       %a{href: "edit"}
       .main-header__edit-btn Edit 
     .messages
-      .message-info
-        %p.message-info__member aaa
-        %p.message-info__date 2019/05/23(Thu) 23:15:09
-      %p.massage-text hello!!
+      = render @messages
+    
     .form
-      %form.message-new  
-        .message-box 
-          %input{ class: "message-box__text",id: "message-content",type: "text",name: "message[content]",placeholder: "type a message"}
-            
-          %label{ class: "image-label" ,
-                  for: "message_image",}
-            %i.fa.fa-image 
-            %input{ class: "image-label__input",type:"file",name: "message[image]",id: "message_image"}
-        %input{ class: "submit-btn",
-                type: "submit",
-                value: "Send",
-                name: "commit",
-                "data-disable-with": "Send"}
-        
+      = form_for [@group, @message] do |f|
+        .message-box
+          = f.text_field :content, class: 'message-box__text', placeholder: 'type a message'
+          .image-label
+            = f.label :image, class: 'image-label' do
+              = fa_icon 'picture-o', class: 'icon'
+              = f.file_field :image, class: 'image-label__input'
+        = f.submit 'Send', class: 'submit-btn'
+
 
 
 
