@@ -13,11 +13,8 @@
       %a{href: "edit"}
       .main-header__edit-btn Edit 
     .messages
-      .message-info
-        %p.message-info__member aaa
-        %p.message-info__date 2019/05/23(Thu) 23:15:09
-      %p.massage-text hello!!
-
+      = render @messages
+    
     .form
       = form_for [@group, @message] do |f|
         .message-box
