@@ -1,27 +1,24 @@
 $(function(){
 
   function buildHTML(message){
+    image = ( message.image ) ? `<img class= "lower-message__image" src=${message.image} >` : "";
+
     var html = `<div class= "messag-info" message-id="${message.id}">
-                        <div class= "message-info__member">
-                          ${message.user_name}
-                        </div>
-                        <div class= "message-info__date">
-                            ${message.created_at}
-                        </div>
-                        <div class= "message__text">
-                          <p class="lower-message__content">
-                            ${message.content}
-                          </p>`
-    if(message.image === null ){
-      var html = html + `</div>
-                </div>`
-      return html;
-    }else{
-      var html = html + `<img class= "lower-message__image", src= ${message.image}>
+                  <div class= "message-info__member">
+                    ${message.user_name}
                   </div>
+                  <div class= "message-info__date">
+                    ${message.created_at}
+                  </div>
+                </div>
+                <div class= "message__text">
+                  <p class="lower-message__content">
+                    ${message.content}
+                  </p>
+                  ${image}
+                  
                 </div>`
-      return html;
-    }
+              return html;
   }
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -37,13 +34,14 @@ $(function(){
     })
     .done(function(data){
       var html = buildHTML(data);
-      $('.messages').append(html);
-      $('.message-box__text').val('')
+      $('.messages').append(html).animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+      $('.message-box__text').val('');
+      $('.submit-btn').prop('disabled',false);
 
     })
     .fail(function(){
       alert('error');
-      
+      $('.submit-btn').prop('disabled',false);
     })
   })
 
